@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub</title>
+    <link rel="icon" href="{% static 'assets/image/icon.png' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/style/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/style/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/style/main.css' %}" />
+  </head>
+
+  <body style="overflow: auto !important">
+    <!-- start nav  -->
+    <!-- <div id="isLoading">
+        <img style="width: 3rem;" src="assets/image/icon.png" alt="" class="fa-spin">
+    </div> -->
+    <div class="to-up position-fixed end-0 bottom-0 m-5 fa-2x">
+      <i class="fas fa-arrow-alt-circle-up"></i>
+    </div>
+    <nav class="navbar navbar-expand-lg p-2 navbar-dark">
+      <div class="container">
+        <a class="navbar-brand fa-2xl" href="#home"
+          ><img
+            style="width: 3rem"
+            src="{% static 'assets/image/icon.png' %}"
+            alt=""
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#home"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'movies' %}">Movies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'community' %}">Community</a>
+            </li>
+            {% if user.is_authenticated %} {% if categories_menu %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Categories
+              </a>
+              <ul class="dropdown-menu">
+                {% for item in categories_menu %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' item %}"
+                    >{{ item }}</a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+          <span class="fw-bold mx-4" id="login"></span>
+        </div>
+        {% if user.is_anonymous %}
+
+        <a
+          style="text-decoration: none; color: white; margin-left: 10px"
+          href="{% url 'login' %}"
+          >Login</a
+        >
+
+        <a
+          style="text-decoration: none; color: white; margin-left: 10px"
+          href="{% url 'register' %}"
+          >Sign Up</a
+        >
+
+        <!--  -->
+        {% elif user.is_authenticated %}
+        <li class="nav-item dropdown" style="list-style: none">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            style="color: white"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if user.profile.id %}
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'edit_personal' user.profile.id %}"
+                >Update Peronal Info</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'edit_profile' %}"
+                >Update Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'show_personal_profile' user.id %}"
+                >Profile</a
+              >
+            </li>
+            {% else %}
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'show_personal_profile' user.id %}"
+                >Create Profile</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        <a
+          style="text-decoration: none; color: white; margin-left: 10px"
+          href="{% url 'logout' %}"
+          >Logout</a
+        >
+        {% elif user.is_anonymous %}
+        <meta
+          http-equiv="REFRESH"
+          content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+        />
+
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- start banner  -->
+    <section class="home" id="home">
+      <div class="overlay">
+        <div class="container">
+          <div class="row g-5 align-items-center justify-content-center vh-100">
+            <div class="col-md-8">
+              <div class="msg text-center py-5 text-white">
+                <h1 class="fa-4x">Welcome To <span>Movies</span> Hub</h1>
+                <p class="lead">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Expedita culpa vitae blanditiis nulla impedit dolorem?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- start about  -->
+    <section class="about py-5" id="about">
+      <div class="container">
+        <div class="about-caption py-5 text-center">
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique
+            earum vel doloremque neque minima, enim quidem. At odit labore
+            exercitationem facere illum minus placeat nobis libero inventore
+            possimus, rem sed. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Nesciunt accusamus, non consectetur sit,
+            voluptatibus eum ipsum recusandae, eligendi nihil obcaecati amet
+            maiores sed fugit dignissimos aperiam illo modi fugiat ab?
+          </p>
+        </div>
+        <div class="row g-5">
+          <div class="col-md-4">
+            <div class="about-item shadow rounded py-5 px-3 text-center">
+              <h4>Action</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="about-item shadow rounded py-5 px-3 text-center">
+              <h4>Stories</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="about-item shadow rounded py-5 px-3 text-center">
+              <h4>Tv</h4>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- start category  -->
+    <section class="category py-5" id="category">
+      <div class="container">
+        <div
+          class="category-caption d-flex justify-content-center align-items-center py-5"
+        >
+          <h3 class="text-uppercase">Categories</h3>
+        </div>
+        <div class="row align-items-center g-5">
+          <div class="col-md-6">
+            <div class="image rounded shadow overflow-hidden">
+              <img
+                class="w-100"
+                src="{% static 'assets/image/1.jpg' %}"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="image rounded shadow overflow-hidden">
+              <img
+                class="w-100"
+                src="{% static 'assets/image/3.jpg' %}"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="review">
+      <div class="overlay py-5">
+        <div class="container">
+          <div class="row justify-content-center g-5">
+            <div class="col-md-4 text-center">
+              <div class="review-item text-center">
+                <span class="fs-2" id="review-random">700k</span>
+                <h5 class="text-white">Reviews</h5>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="review-item text-center">
+                <span class="fs-2" id="review-random">500k</span>
+                <h5 class="text-white">Watching</h5>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="review-item text-center">
+                <span class="fs-2" id="review-random">800k</span>
+                <h5 class="text-white">Subscribe</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'assets/js/index.js' %}"></script>
+  </body>
+</html>

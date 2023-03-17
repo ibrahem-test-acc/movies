@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block title %} Update Profile {% endblock title %}
+<!--  -->
+
+{% block content %}
+<!--  -->
+{% if user.is_anonymous %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+/>
+
+<style>
+  nav {
+    background-color: transparent !important;
+  }
+  a {
+    color: transparent !important;
+  }
+  #the-icon {
+    width: 0;
+    height: 0;
+  }
+  body {
+    background: url("/static/assets/image/bg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+{% endif %}
+<!--  -->
+{% if user.is_authenticated %}
+<!--  -->
+{% if user.id == profile.user.id %}
+
+<h1>Update Your Personal Info</h1>
+<hr />
+<br />
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <div style="display: flex; flex-direction: row">
+    <button type="submit" class="btn btn-success">Update</button>
+    <a
+      href=" {% url 'community' %} "
+      class="btn btn-danger"
+      style="margin-left: 20px"
+      >Cancel</a
+    >
+  </div>
+</form>
+
+<br />
+<br />
+
+{% else %}
+<h1 style="color: gray; margin-top: 2vw">Page Not Found....!</h1>
+{% endif %}
+<!--  -->
+{% else %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+/>
+
+{% endif %}
+<!--  -->
+{% endblock content %}

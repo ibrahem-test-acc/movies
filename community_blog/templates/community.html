@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+
+{% block content %}
+<!--  -->
+
+{% if user.is_anonymous %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+/>
+
+<style>
+  nav {
+    background-color: transparent !important;
+  }
+  a {
+    color: transparent !important;
+  }
+  #the-icon {
+    width: 0;
+    height: 0;
+  }
+  body {
+    background: url("/static/assets/image/bg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+{% endif %}
+
+<!--  -->
+
+{% if user.is_authenticated %}
+<!--  -->
+
+<div style="display: flex; justify-content: space-between">
+  <h1 style="display: inline-block; margin-right: 5%">Posts</h1>
+  <div style="align-self: center">
+    {% if user.is_staff %}
+
+    <a
+      style="
+        text-decoration: none;
+        color: white;
+        height: fit-content;
+        align-self: center;
+      "
+      href="{% url 'add_category' %}"
+      ><button type="button" class="btn btn-secondary">Add Category</button></a
+    >
+
+    {% endif %}
+
+    <a style="text-decoration: none; color: white" href="{% url 'add_post' %}">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="height: fit-content; align-self: center"
+      >
+        Add Post
+      </button></a
+    >
+  </div>
+</div>
+<hr />
+<br />
+<ul style="padding: 0">
+  {% for post in object_list %}
+
+  <li style="display: flex; justify-content: space-between">
+    <div>
+      <a
+        style="text-decoration: none"
+        href="{% url 'article_details' post.pk %}"
+        >{{ post.title|slice:30 }}
+      </a>
+      <span style="color: rgb(166, 219, 86)"> {{ post.movie_name }}</span>
+
+      <span style="color: #54c8f7"
+        >BY
+        <a
+          href="{% url 'show_profile' post.author_id %}"
+          style="text-decoration: none; color: #54c8f7; font-weight: 600"
+        >
+          {{ post.author.get_full_name }}</a
+        ></span
+      >
+      <a
+        style="color: black; text-decoration: none; padding-left: 10px"
+        href="{% url 'category' post.category %}"
+        >({{ post.category }})</a
+      >
+    </div>
+    {% if user.id == post.author.id %}
+    <p style="width: 5.25vw">
+      <a
+        style="
+          text-decoration: none;
+          color: green;
+          border-bottom: lime 2px solid;
+        "
+        href="{% url 'update_post' post.pk %}"
+        >Edit</a
+      >
+
+      <a
+        style="
+          text-decoration: none;
+          color: red;
+          border-bottom: red 2px solid;
+          font-weight: 600;
+          font-size: smaller;
+        "
+        href="{% url 'delete_post' post.pk %}"
+        >Delete</a
+      >
+    </p>
+
+    {% endif %}
+    <!--  -->
+    {% if user.id != post.author.id %}
+    <!--  -->
+    {% if user.is_superuser %}
+    <p>
+      <a
+        style="text-decoration: none; color: red"
+        href="{% url 'delete_post' post.pk %}"
+        >(Delete)</a
+      >
+    </p>
+    {% endif %}
+    <!--  -->
+    {% endif %}
+  </li>
+
+  <li style="list-style-type: none; width: 50vw; overflow: hidden">
+    <a
+      style="text-decoration: none; width: 15%; color: gray"
+      href=" {% url 'article_details' post.pk %} "
+      >{{ post.body|slice:'300' }}</a
+    >
+  </li>
+  <br />
+  {% endfor %}
+</ul>
+
+{% endif %}
+<!--  -->
+{% endblock %}

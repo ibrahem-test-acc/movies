@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub</title>
+    <link rel="icon" href="{% static 'assets/image/icon.png' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/style/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/style/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/style/main.css' %}" />
+  </head>
+
+  <body>
+    <div class="to-up position-fixed end-0 bottom-0 m-5 fa-2x">
+      <i class="fas fa-arrow-alt-circle-up"></i>
+    </div>
+
+    <nav class="navbar navbar-expand-lg p-2 navbar-dark">
+      <div class="container">
+        <a class="navbar-brand fa-2xl" href="home.html#home"
+          ><img
+            style="width: 3rem"
+            src="{% static 'assets/image/icon.png' %}"
+            alt=""
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'Home' %}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Home' %}#about">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'community' %}">Community</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Categories
+              </a>
+              <ul class="dropdown-menu">
+                {% for item in categories_menu %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' item %}"
+                    >{{ item }}</a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+          {% endif %}
+          <span class="fw-bold mx-4" id="login"></span>
+        </div>
+        {% if user.is_anonymous %}
+
+        <a
+          style="text-decoration: none; color: white; margin-left: 10px"
+          href="{% url 'login' %}"
+          >Login</a
+        >
+
+        <a
+          style="text-decoration: none; color: white; margin-left: 10px"
+          href="{% url 'register' %}"
+          >Sign Up</a
+        >
+
+        <!--  -->
+        {% elif user.is_authenticated %}
+        <li class="nav-item dropdown" style="list-style: none">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            style="color: white"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'edit_personal' user.profile.id %}"
+                >Update Peronal Info</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'edit_profile' %}"
+                >Update Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'show_personal_profile' user.id %}"
+                >Profile</a
+              >
+            </li>
+          </ul>
+        </li>
+        <a
+          style="text-decoration: none; color: white; margin-left: 10px"
+          href="{% url 'logout' %}"
+          >Logout</a
+        >
+        {% elif user.is_anonymous %}
+        <meta
+          http-equiv="REFRESH"
+          content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+        />
+
+        {% endif %}
+        <!--  -->
+      </div>
+    </nav>
+
+    <div class="Movies py-5" id="#movies">
+      <div class="container py-5">
+        <div class="row g-5" id="showData"></div>
+      </div>
+    </div>
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-3.6.3.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/index.js' %}"></script>
+    <script src="{% static 'assets/js/Movies.js' %}"></script>
+  </body>
+</html>

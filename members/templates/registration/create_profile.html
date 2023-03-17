@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block title %} Create Profile Page {% endblock title %}
+<!--  -->
+{% block content %}
+<!--  -->
+{% if user.is_anonymous %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+/>
+
+<style>
+  nav {
+    background-color: transparent !important;
+  }
+  a {
+    color: transparent !important;
+  }
+  #the-icon {
+    width: 0;
+    height: 0;
+  }
+  body {
+    background: url("/static/assets/image/bg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+{% endif %}
+<!--  -->
+
+{% if user.is_authenticated %}
+<!--  -->
+{% if user.profile.id %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/community/"
+/>
+<style>
+  nav {
+    background-color: transparent !important;
+  }
+  a {
+    color: transparent !important;
+  }
+  #the-icon {
+    width: 0;
+    height: 0;
+  }
+  body {
+    background: url("/static/assets/image/bg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: darken;
+  }
+</style>
+{% else %}
+<h1 style="color: gray">Create Profile Page</h1>
+<p style="margin: 1vw">Let others know who you are..!</p>
+<hr />
+<br />
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!--  -->
+  {{ form.as_p }}
+
+  <div style="display: flex; flex-direction: row">
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a
+      href=" {% url 'community' %} "
+      class="btn btn-light"
+      style="margin-left: 20px"
+      >Cancel</a
+    >
+  </div>
+</form>
+<br />
+<br />
+<br />
+{% endif %}
+<!--  -->
+{% endif %}
+
+<!--  -->
+{% endblock content %}

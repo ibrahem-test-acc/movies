@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block title %} Create New Category {% endblock title %}
+<!--  -->
+{% block content %}
+<!--  -->
+{% if user.is_anonymous %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+/>
+
+<style>
+  nav {
+    background-color: transparent !important;
+  }
+  a {
+    color: transparent !important;
+  }
+  #the-icon {
+    width: 0;
+    height: 0;
+  }
+  body {
+    background: url("/static/assets/image/bg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  .errorlist {
+    height: fit-content !important;
+    padding-left: 0 !important;
+  }
+  .errorlist li {
+    color: #842029 !important;
+    background-color: #f5c2c7 !important;
+    padding: 10px !important;
+    margin-bottom: 1rem !important;
+    border-radius: 0.25rem !important;
+    list-style-type: none !important;
+  }
+</style>
+{% endif %}
+
+<!--  -->
+{% if user.is_authenticated %}
+<h1>Add Category</h1>
+<hr />
+<br />
+
+<form method="post" style="position: relative">
+  {% csrf_token %}
+  <!--  -->
+  {{ form.as_p }}
+
+  <div style="display: flex; flex-direction: row; position: absolute; top: 5vw">
+    <button type="submit" class="btn btn-success">Add</button>
+    <a
+      href=" {% url 'community' %} "
+      class="btn btn-light"
+      style="margin-left: 20px"
+      >Back</a
+    >
+  </div>
+</form>
+{% endif %}
+
+<!--  -->
+{% endblock content %}

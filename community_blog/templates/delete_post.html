@@ -1,0 +1,108 @@
+{% extends 'base.html' %} {% block title %} Delete Post {% endblock title %}
+<!--  -->
+
+{% block content %}
+<!--  -->
+
+{% if user.is_anonymous %}
+<meta
+  http-equiv="REFRESH"
+  content="0; url=https://ibrahemfathy.pythonanywhere.com/members/login/"
+/>
+
+<style>
+  nav {
+    background-color: transparent !important;
+  }
+  a {
+    color: transparent !important;
+  }
+  #the-icon {
+    width: 0;
+    height: 0;
+  }
+  body {
+    background: url("/static/assets/image/bg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+{% endif %}
+<!--  -->
+{% if user.is_authenticated %}
+<!--  -->
+{% if user.id == post.author.id %}
+<br />
+<h2 style="color: red; font-weight: bold">Delete Post !</h2>
+<br />
+<hr />
+<br />
+<br />
+<h4>
+  Are You Sure You Want To Delete: "<span style="color: red"
+    >{{ post.title }}</span
+  >" ?!
+</h4>
+<br />
+<br />
+<b>{{ post.title }}</b>
+
+<p>{{ post.body }}</p>
+<br />
+<br />
+<form method="post">
+  {% csrf_token %}
+  <div style="display: flex; flex-direction: row">
+    <button type="submit" class="btn btn-danger">Delete</button>
+
+    <a
+      href=" {% url 'community' %} "
+      class="btn btn-light"
+      style="margin-left: 20px"
+      >Back</a
+    >
+  </div>
+</form>
+
+{% elif user.is_superuser %}
+<br />
+<h2 style="color: red; font-weight: bold">Delete Post !</h2>
+<br />
+<hr />
+<br />
+<br />
+<h4>
+  Are You Sure You Want To Delete: "<span style="color: red"
+    >{{ post.title }}</span
+  >" ?!
+</h4>
+<br />
+<br />
+<b>{{ post.title }}</b>
+
+<p>{{ post.body }}</p>
+<br />
+<br />
+<form method="post">
+  {% csrf_token %}
+  <div style="display: flex; flex-direction: row">
+    <button type="submit" class="btn btn-danger">Delete</button>
+
+    <a
+      href=" {% url 'community' %} "
+      class="btn btn-light"
+      style="margin-left: 20px"
+      >Back</a
+    >
+  </div>
+</form>
+{% else %}
+<h3 style="margin-top: 10vh; color: gray">
+  Sorry This Page Does Not Exist....!
+</h3>
+<!--  -->
+{% endif %}
+<!--  -->
+{% endif %}
+<!--  -->
+{% endblock content %}
