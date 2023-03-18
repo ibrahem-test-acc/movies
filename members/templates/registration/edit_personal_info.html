@@ -35,7 +35,7 @@
 <h1>Update Your Personal Info</h1>
 <hr />
 <br />
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   {% csrf_token %} {{ form.as_p }}
   <div style="display: flex; flex-direction: row">
     <button type="submit" class="btn btn-success">Update</button>

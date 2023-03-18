@@ -44,6 +44,8 @@ class EditPersonalForm(forms.ModelForm):
     tw_url = forms.URLField(required=False, widget=forms.TextInput(
         attrs={'class': 'form-control'}))
 
+    profile_pic = forms.ImageField()
+
     class Meta:
         model = Profile
         fields = ('bio', 'profile_pic', 'fb_url', 'tw_url', 'insta_url')

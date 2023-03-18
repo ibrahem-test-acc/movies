@@ -1,6 +1,9 @@
 from django.urls import path
 from .views import UserRegisterView, UserEditView, PasswordsChangeView, ShowProfileView, EditPersonalView, CreateProfilePageView
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('register/', UserRegisterView.as_view(), name='register'),
     path('edit_profile/', UserEditView.as_view(), name='edit_profile'),
@@ -15,4 +18,4 @@ urlpatterns = [
          EditPersonalView.as_view(), name='edit_personal'),
     path('create_profile_page',
          CreateProfilePageView.as_view(), name='create_profile'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
