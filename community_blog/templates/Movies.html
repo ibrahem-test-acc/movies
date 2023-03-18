@@ -104,12 +104,15 @@
           <a
             class="nav-link"
             href="{% url 'admin:index' %}"
-            style="color: rgb(51 255 0 / 69%)"
+            style="color: rgb(51 255 0 / 69%); margin-right: 10px"
             >Admin Page</a
           >
         </li>
         {% endif %}
-        <li class="nav-item" style="list-style: none; color: white">
+        <li
+          class="nav-item"
+          style="list-style: none; color: white; margin-right: 10px"
+        >
           Hello {{ user.first_name }}
         </li>
         <li class="nav-item dropdown" style="list-style: none">
