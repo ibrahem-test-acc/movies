@@ -114,17 +114,25 @@
             <a
               class="nav-link"
               href="{% url 'admin:index' %}"
-              style="color: white; margin-right: 10px"
+              style="
+                font-size: larger;
+                background: -webkit-linear-gradient(#eee, #54c8f7);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-right: 10px;
+              "
               >Admin Page</a
             >
           </li>
-          {% endif %}
+          {% else %}
           <li
             class="nav-item"
             style="list-style: none; color: white; margin-right: 10px"
           >
             Hello {{ user.first_name }}
           </li>
+          {% endif %}
 
           <li class="nav-item dropdown" style="list-style: none">
             <a
@@ -137,32 +145,46 @@
             >
               Profile
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              style="background-color: #6c757da1"
+            >
               {% if user.profile.id %}
               <li>
                 <a
+                  style="color: #292828"
                   class="dropdown-item"
                   href="{% url 'show_personal_profile' user.id %}"
                   >Profile</a
                 >
               </li>
+              <hr style="margin: 0px; color: white; padding: 1px" />
+
               <li>
                 <a
+                  style="color: #292828"
                   class="dropdown-item"
                   href="{% url 'edit_personal' user.profile.id %}"
                   >Update Peronal Info</a
                 >
               </li>
-
+              <hr style="margin: 0px; color: white; padding: 1px" />
               <li>
-                <a class="dropdown-item" href="{% url 'edit_profile' %}"
+                <a
+                  class="dropdown-item"
+                  href="{% url 'edit_profile' %}"
+                  style="color: #292828"
                   >Update Profile</a
                 >
               </li>
 
               {% else %}
               <li>
-                <a class="dropdown-item" href="{% url 'create_profile' %}"
+                <a
+                  class="dropdown-item"
+                  href="{% url 'create_profile' %}"
+                  style="color: #292828"
                   >Create Profile</a
                 >
               </li>

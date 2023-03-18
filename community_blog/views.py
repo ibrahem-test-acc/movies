@@ -4,6 +4,7 @@ from .models import Post, Category, Comment
 from django.urls import reverse_lazy, reverse
 from .forms import PostForm, CommentForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 
 def LikeView(request, pk):

@@ -35,7 +35,7 @@
 <h1>Update Post</h1>
 <hr />
 <br />
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <!--  -->
   {{ form.as_p }}
