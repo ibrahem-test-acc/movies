@@ -4,47 +4,6 @@ from .models import Post, Category, Comment
 from django.urls import reverse_lazy, reverse
 from .forms import PostForm, CommentForm
 from django.http import HttpResponseRedirect
-# import requests
-# import json
-
-
-# movie_response = requests.get(
-#     f"https://api.themoviedb.org/3/movie/856?api_key={moviedb_api_key}")
-
-# movie_json = json.loads(movie_response.text)
-# for key, value in movie_json.items():
-
-#     print(key, ":", value)
-#     movie_response = requests.get(f"{moviedb_base_url}/movie/{movie_id}?api_key={moviedb_api_key}")
-# def load_json_for_url(url):
-#     response = requests.get(url)
-#     return json.loads(response.text)
-
-
-# moviedb_api_key = "b4067cc44892621e5a29e288523d898b"
-# moviedb_base_url = "https://api.themoviedb.org/3/"
-
-
-# def load_moviedb_info(path):
-#     return load_json_for_url(f"{moviedb_base_url}/{path}?api_key={moviedb_api_key}")
-
-
-# def get_movie_info(movie_id):
-#     return load_moviedb_info(f"movie/{movie_id}")
-
-
-# def get_person_info(person_id):
-#     return load_moviedb_info(f"person/{person_id}")
-
-
-# def MovieDetail(request):
-#     response = requests.get(
-#         'https://api.themoviedb.org/3/trending/movie/day?api_key=b4067cc44892621e5a29e288523d898b').json()
-#     title = get_movie_info(856)['title']
-#     print(get_person_info(11614)['name'])
-#     print(get_movie_info(856)['title'])
-
-#     return render(request, 'movie_details.html', {'response': response, 'title': title})
 
 
 def LikeView(request, pk):
