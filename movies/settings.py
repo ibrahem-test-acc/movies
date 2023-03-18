@@ -128,7 +128,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'community_blog/static'),
 
 ]
-STATIC_ROOT = "/home/Ibrahemfathy/movies/static"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
